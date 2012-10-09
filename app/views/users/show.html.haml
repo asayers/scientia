@@ -13,7 +13,7 @@
     - @user.documents.each do |document|
       %tr
         %td= link_to document.name, [@user, document]
-        %td= truncate strip_tags(document.html), length: 50
+        %td= truncate strip_tags(document.html), length: 60
 .grid
   #templates
     .meta.clearfix

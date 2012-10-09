@@ -6,6 +6,16 @@ class UrlSafeValidator < ActiveModel::EachValidator
   end
 end
 
+class WhitelistValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    whitelist = ["test@test.com"]
+    unless whitelist.include? value
+      record.errors[attribute] << (options[:message] || "has not been invited to the Closed Beta")
+    end
+  end
+end
+
+
 class User < ActiveRecord::Base
   extend FriendlyId
   has_many :documents
@@ -22,6 +32,7 @@ class User < ActiveRecord::Base
   validates_length_of :password, minimum: 6
   validates_confirmation_of :password
   validates :username, url_safe: true
+  validates :email, whitelist: true
 end
 
 
