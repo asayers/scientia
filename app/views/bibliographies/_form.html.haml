@@ -1,0 +1,6 @@
+= simple_form_for [@user, @bibliography] do |f|
+  = f.error_notification
+  = f.input :name
+  = f.input :body, label: false
+  = f.error :base
+  = f.button :submit

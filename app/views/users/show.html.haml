@@ -1,0 +1,36 @@
+.title
+  %h1= @user.username
+
+.meta.clearfix
+  %span #{@user.username} has #{pluralize @user.documents.length, "document"} on record:
+  %ul
+    - if @user == current_user
+      %li= button_to "Change settings", edit_user_path(@user), method: :get
+      %li= button_to "New Document", new_user_document_path, method: :get
+
+#documents
+  %table
+    - @user.documents.each do |document|
+      %tr
+        %td= link_to document.name, [@user, document]
+        %td= truncate strip_tags(document.html), length: 50
+.grid
+  #templates
+    .meta.clearfix
+      - temps = @user.templates.length
+      %span= pluralize(temps, "template") + (temps > 0 ? ":" : ".")
+      %ul
+        - if @user == current_user
+          %li= button_to "New Template", new_user_template_path, method: :get
+    - @user.templates.each do |template|
+      %p= link_to template.name, [@user, template]
+  #bibliographies
+    .meta.clearfix
+      - bibs = @user.bibliographies.length
+      %span= pluralize(bibs, "bibliography") + (bibs > 0 ? ":" : ".")
+      %ul
+        - if @user == current_user
+          %li= button_to "New Bibliography", new_user_bibliography_path, method: :get
+    - @user.bibliographies.each do |bibliography|
+      %p= link_to bibliography.name, [@user, bibliography]
+

@@ -1,0 +1,356 @@
+@import "normalize";
+@import "bourbon";
+@import "print";
+@import "screen";
+@import "grid";
+@import "colors";
+@import "simpleform";
+@import "fonts";
+
+//* {
+//  border: 1px solid red !important;
+//}
+
+// Mixins
+
+@mixin hero($color) {
+  width: 90%;
+  padding: 5%;
+  margin: 1em auto;
+  text-align: center;
+  background-color: lighten($color, 10%);
+  @include border-radius(8px);
+  h1 {
+    color: darken($color,10%);
+    text-shadow: 0px 1px 1px lighten($color, 20%);
+    font-family: "Marcellus SC", serif;
+    font-size: 55px;
+    font-weight: 500;
+    margin: 0;
+    span {
+      font-family: monospace;
+      font-size: 40px;
+      color: lighten($color, 30%);
+    }
+  }
+  p {
+    color: darken($color, 10%);
+    font-family: "Marcellus SC", serif;
+    margin: 0;
+    a {
+      color: darken($color, 10%);
+      &:hover {
+        color: $color;
+      }
+    }
+  }
+}
+
+@mixin bttn($color) {
+  background-color: $color;
+  @include background(linear-gradient(top, lighten($color, 10%), $color));
+  color: darken($color, 20%);
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  padding: .5em 0 .55em;
+  font-weight: 800;
+  text-shadow: 0px 1px 1px rgba(255,255,255,0.3);
+  @include border-radius(4px, 4px);
+  @include single-box-shadow(rgba(0,0,0,.2), 0px, 1px, 2px);
+  &:hover {
+    background-color: lighten($color, 10%);
+    @include background(linear-gradient(top, lighten($color, 20%), lighten($color, 10%)));
+    color: darken($color, 10%);
+  }
+  &:active {
+    position: relative;
+    top: 2px;
+    background-color: $color;
+    @include background(linear-gradient(top, lighten($color, 10%), $color));
+    color: darken($color, 20%);
+  }
+  p {
+    width: 100%;
+    font-size: 12px;
+  }
+  h1 {
+    width: 100%;
+    font-family: "Marck Script", cursive;
+    font-size: 28px;
+  }
+
+}
+
+
+// Tables
+
+table {
+  width: 100%;
+}
+th {
+  font-weight: 800;
+}
+
+// Typography
+
+a {
+  color: #000;
+  &:visited {
+    color: #000;
+  }
+  &:hover {
+    color: #aaa;
+  }
+}
+
+em {
+  font-style: italic;
+}
+
+.title {
+  @include hero($brown);
+}
+.title.edit {
+  @include hero($yellow);
+
+}
+
+.subtitle {
+  color: darken(#963, 10%);
+  text-align: center;
+  font-family: "Oranienbaum", cursive;
+  font-size: 24px;
+  margin-top: 2em;
+}
+
+// Styles
+
+.alert, .modal {
+  padding: 1em;
+  background-color: #ddd;
+  color: #aaa;
+  a {
+    color: #aaa;
+  }
+  li {
+    display: inline;
+    padding-right: 20px;
+  }
+  form {
+    float: right;
+    padding-right: 20px;
+  }
+}
+
+.comment {
+  margin-top: 10px;
+  padding-top: 5px;
+  border-top: 1px solid #ddd;
+  .user {
+    font-style: italic;
+    font-size: 12px;
+  }
+  .delete {
+    font-size: 10px;
+    float: right;
+  }
+}
+
+.muted {
+  color: #aaa;
+  font-size: 12px;
+  text-align: center;
+  padding-bottom: 1em;
+  a {
+    color: #aaa;
+    &:hover {
+      color: darken(#aaa, 10%);
+    }
+  }
+}
+
+.meta {
+  font-size: 13px;
+  margin-left: 1em;
+  margin-right: 1em;
+  span {
+    float:left;
+    margin-top: 2px;
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+    display: inline;
+    list-style: none;
+    li {
+      padding: 0 0 0 10px;
+      float:right;
+    }
+  }
+}
+
+.simple_form {
+  textarea {
+//    font-family: "Droid Sans Mono", monospace;
+    font-family: monospace;
+    font-size: 16px;
+  }
+}
+
+#md, #latex, #bib, #temp {
+  img {
+    float: left;
+    margin-right: 10px;
+  }
+}
+
+#document {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em;
+  border: 1px solid #aaa;
+  font-family: "Oranienbaum", serif;
+  #warning {
+    font-size: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+  }
+  #heading {
+    text-align: center;
+  }
+  table,th,td {
+    border: 1px solid black;
+  }
+}
+
+#template, #bibliography, #markdown {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em;
+  border: 1px solid #aaa;
+  font-family: monospace;
+}
+
+#documents {
+  margin-top: 1em;
+}
+
+#templates, #bibliographies {
+  font-size: 12px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 280px;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  .meta {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  p {
+    margin: 0.5em 0 0 1em;
+  }
+}
+
+#errors {
+  font-family: monospace;
+  color: $red;
+  padding: 1em;
+  margin: 1em;
+  border: 2px solid $red;
+}
+
+.center {
+  text-align: center;
+}
+
+// Buttons
+
+.btn {
+  @include button(simple, $brown);
+  font-size: 16px;
+}
+
+a.btn {
+  color: #eee;
+  &:hover {
+    color: #eee;
+  }
+}
+
+// Header and footer
+
+header {
+  margin-top: 1em;
+	margin-bottom: 1em;
+  border-bottom: 1px solid #ddd;
+  h1 {
+    font-family: "Marcellus SC", serif;
+    font-size: 16px;
+    font-weight: 500;
+    float:left;
+    margin: 0;
+    a {
+      color: #000;
+      text-decoration: none;
+      &:visited {
+        color: #000;
+      }
+      &:hover {
+        color: #000;
+      }
+
+    }
+  }
+  h2 {
+    margin: 5px 0 0 7px;
+    font-family: monospace;
+    font-size: 12px;
+    float:left;
+    a {
+      color: $yellow;
+      text-decoration: none;
+      &:visited {
+        color: $yellow;
+      }
+      &:hover {
+        color: $yellow;
+      }
+
+    }
+  }
+  ul.nav {
+    margin-top: 2px;
+    margin-bottom: 0;
+    padding-left: 0;
+    float: right;
+    color: #666;
+    font-size: 12px;
+    li {
+      display: inline;
+      padding-left: 20px;
+    }
+    a {
+      color: #666;
+      font-size: 12px;
+      text-decoration: none;
+      &:hover {
+        color: #999;
+      }
+    }
+  }
+}
+
+footer {
+  border-top: 1px solid #ddd;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-size: 10px;
+  color: #ddd;
+  text-align: center;
+}

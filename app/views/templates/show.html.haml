@@ -1,0 +1,26 @@
+.title
+  %h1= @template.name
+
+.meta.clearfix
+  %span Created by #{link_to @user.username, @user} on #{@template.created_at.to_date.inspect}
+  %ul
+    - if @user == current_user
+      %li= button_to 'Delete', [@user, @template], method: :delete, confirm: "Are you sure?"
+      %li= button_to 'Edit', edit_user_template_path(user_id: @user, id: @template), method: :get
+    - else
+      %li= button_to "Clone", new_user_template_path(template: {name: @template.name, body: @template.body})
+    - if @template.pdf.nil?
+      - if @template.warnings.nil?
+        %li= button_to "Generating...", "#", disabled: true
+      - else
+        %li= button_to "Error!", "#", disabled: true
+    - else
+      %li= button_to "View preview", user_template_path(user_id: @user, id: @template, format: :pdf), method: :get
+    %li= button_to "View raw", user_template_path(user_id: @user, id: @template, format: :tex), method: :get
+
+- unless @template.warnings.nil?
+  #errors= @template.warnings
+
+#template
+  %code
+    %pre= @template.body

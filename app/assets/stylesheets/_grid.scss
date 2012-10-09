@@ -1,0 +1,48 @@
+// Based on Grater by Sam Soffes
+
+div.container {
+  width: 640px;
+  margin: 0 auto;
+}
+
+@media all and (max-width: 660px) {
+  div.container {
+    width: 300px;
+  }
+}
+
+.grid {
+  zoom: 1;
+
+  > div {
+    width: 300px;
+//    margin: 0 0 2em;
+  
+    &:first-child {
+      float: left;
+    }
+    &:last-child {
+      float: right;
+    }
+  }
+
+  &:before, &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@media all and (max-width: 660px) {
+  .grater {
+    margin-bottom: 1em;
+  
+    > div {
+      float: none !important;
+      margin: 0 auto 2em;
+    }
+  }
+}

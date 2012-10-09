@@ -1,0 +1,16 @@
+.title
+  %h1 Status
+
+.meta.clearfix
+  %span Statistics:
+  %ul
+    %li= pluralize @bibliography_count, "bibliography"
+    %li= pluralize @template_count, "template"
+    %li= pluralize @document_count, "document"
+    %li= pluralize @user_count, "user"
+
+%p Note that Textore is still in BETA. As such certain features are not working yet:
+
+%ul
+  %li Bibliographies in pdf output
+  %li Error reporting

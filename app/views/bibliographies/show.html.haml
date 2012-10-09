@@ -1,0 +1,16 @@
+.title
+  %h1= @bibliography.name
+
+.meta.clearfix
+  %span Created by #{link_to @user.username, @user} on #{@bibliography.created_at.to_date.inspect}
+  %ul
+    - if @user == current_user
+      %li= button_to 'Delete', [@user, @bibliography], method: :delete, confirm: "Are you sure?"
+      %li= button_to 'Edit', edit_user_bibliography_path(user_id: @user, id: @bibliography), method: :get
+    - else
+      %li= button_to "Clone", new_user_bibliography_path(bibliography: {name: @bibliography.name, body: @bibliography.body})
+    %li= button_to "View raw", user_bibliography_path(user_id: @user, id: @bibliography, format: :bib), method: :get
+
+#bibliography
+  %code
+    %pre= @bibliography.body
