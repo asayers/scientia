@@ -27,6 +27,7 @@
     font-size: 55px;
     font-weight: 500;
     margin: 0;
+    margin-bottom: 5px;
     span {
       font-family: monospace;
       font-size: 40px;
@@ -113,6 +114,13 @@ em {
 
 .title {
   @include hero($brown);
+  img {
+    border: 1px solid darken($brown, 10%);
+    padding: 2px;
+    margin-bottom: 2em;
+    float: left;
+    vertical-align: middle;
+  }
 }
 .title.edit {
   @include hero($yellow);
@@ -130,20 +138,45 @@ em {
 // Styles
 
 .alert, .modal {
+  @include clearfix;
   padding: 1em;
   background-color: #ddd;
+}
+
+.gray {
+  background-color: #ddd;
+  font-size: 13px;
+  color: #555;
+  a {
+    color: #555;
+  }
+}
+
+.ctrls {
+  @include clearfix;
+  .left {
+    span {
+      float: left;
+      padding-right: 20px;
+    }
+  }
+  .right {
+    span {
+      float: right;
+      padding-left: 20px;
+    }
+  }
+}
+
+#login-modal {
   color: #aaa;
   a {
     color: #aaa;
   }
-  li {
-    display: inline;
-    padding-right: 20px;
-  }
-  form {
-    float: right;
-    padding-right: 20px;
-  }
+}
+
+#more-modal {
+  margin-top: 1em;
 }
 
 .comment {

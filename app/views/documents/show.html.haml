@@ -4,9 +4,10 @@
 .meta.clearfix
   %span Created by #{link_to @user.username, @user} on #{@document.created_at.to_date.inspect}
   %ul
+    %li= button_to "More...", "#", method: :get, id: "more", class: "modal-toggle"
     - if @user == current_user
-      %li= button_to 'Delete', [@user, @document], method: :delete, confirm: "Are you sure?"
-      %li= button_to 'Edit', edit_user_document_path(user_id: @user, id: @document), method: :get
+      %li= button_to "Delete", [@user, @document], method: :delete, confirm: "Are you sure?"
+      %li= button_to "Edit", edit_user_document_path(user_id: @user, id: @document), method: :get
     - if @document.pdf.nil?
       - if @document.errors.nil?
         %li= button_to "Generating...", "#", disabled: true
@@ -14,19 +15,22 @@
         %li= button_to "Error!", "#", disabled: true
     - else
       %li= button_to "View PDF", user_document_path(user_id: @user, id: @document, format: :pdf), method: :get
-    %li= button_to "View raw", user_document_path(user_id: @user, id: @document, format: :md), method: :get
+
+#more-modal.modal.gray
+  .ctrls
+    .left
+      %span Template: #{@document.template.nil? ? link_to("Default", "/root/templates/default") : link_to(@document.template.name, [@user,@document.template])}
+      %span Bibliography: #{@document.bibliography.nil? ? link_to("Default", "/root/bibliographies/default") : link_to(@document.bibliography.name, [@user,@document.bibliography])}
+    .right
+      %span= button_to "View tex", user_document_path(user_id: @user, id: @document, format: :tex), method: :get
+      %span= button_to "View raw", user_document_path(user_id: @user, id: @document, format: :md), method: :get
+  %hr
+  %p Metadata coming soon! (Title, authors, date, world count, referenced by...)
 
 - unless @document.warnings.nil?
   #errors= @document.warnings
-      
 
 #document
   #warning
     %span Note: the following is a preview, and may not accurately represent the output pdf.
   = @document.html.html_safe
-
-#details.grid
-  #temp
-    %p Template: #{@document.template.nil? ? link_to("Default", "/root/templates/default") : link_to(@document.template.name, [@user,@document.template])}
-  #bib
-    %p Bibliography: #{@document.bibliography.nil? ? link_to("Default", "/root/bibliographies/default") : link_to(@document.bibliography.name, [@user,@document.bibliography])}
