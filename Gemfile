@@ -7,8 +7,8 @@ gem 'rails', '3.2.3'
 
 # Server gems
 gem 'pg'
-gem 'thin'
-#gem 'unicorn'
+#gem 'thin'
+gem 'unicorn'
 gem 'sidekiq'
 
 # Sidekiq monitoring
