@@ -1,4 +1,9 @@
-root = "/home/server/scientia"
+if ENV["RAILS_ENV"] == "production"
+  root = "/home/server/scientia"
+else
+  root = "/home/alex/git/scientia"
+end
+
 working_directory root
 pid "#{root}/tmp/unicorn.pid"
 stderr_path "#{root}/log/unicorn.log"
