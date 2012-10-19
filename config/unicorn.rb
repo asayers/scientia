@@ -7,3 +7,4 @@ stdout_path "#{root}/log/unicorn.log"
 listen "/tmp/unicorn.scientia.sock"
 worker_processes 5
 timeout 30
+preload_app true
