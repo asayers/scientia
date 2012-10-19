@@ -10,6 +10,10 @@ gem 'pg'
 gem 'thin'
 gem 'sidekiq'
 
+# Sidekiq monitoring
+gem 'slim'
+gem 'sinatra', :require => nil
+
 # Authentication
 gem 'sorcery'
 
@@ -23,9 +27,9 @@ gem 'friendly_id'
 # Rendering
 gem 'liquid', git: "git://github.com/asayers/liquid.git"
 #gem 'pandoc-ruby'       # Will change to Kramdown
-gem 'kramdown'
+gem 'rpeg-multimarkdown'
 gem 'rtex'              # Will change to just using rubber (external)
-# md -> latex:  redcarpet, (RedCloth), Kramdown, Multimarkdown
+# md -> latex:  redcarpet, Kramdown, Multimarkdown
 # latex -> pdf: rtex, rubbr, rails-latex
 # md -> pdf:    maruku, pandoc-ruby
 

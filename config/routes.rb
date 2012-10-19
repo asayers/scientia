@@ -1,4 +1,8 @@
 Scientia::Application.routes.draw do
+  require 'sidekiq/web'
+
+  mount Sidekiq::Web => '/sidekiq'
+
   root to: "home#index"
   
   get     "home"              => "home#index"

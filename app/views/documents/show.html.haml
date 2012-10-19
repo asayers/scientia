@@ -10,11 +10,11 @@
       %li= button_to "Edit", edit_user_document_path(user_id: @user, id: @document), method: :get
     - if @document.pdf.nil?
       - if @document.errors.nil?
-        %li= button_to "Generating...", "#", disabled: true
+        %li#pdf-disabled= button_to "Generating...", "#", disabled: true
       - else
-        %li= button_to "Error!", "#", disabled: true
+        %li#pdf-disabled= button_to "Error!", "#", disabled: true
     - else
-      %li= button_to "View PDF", user_document_path(user_id: @user, id: @document, format: :pdf), method: :get
+      %li#pdf-enabled= button_to "View PDF", user_document_path(user_id: @user, id: @document, format: :pdf), method: :get
 
 #more-modal.modal.gray
   .ctrls

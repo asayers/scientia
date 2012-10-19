@@ -39,7 +39,8 @@ class Document < ActiveRecord::Base
     end
 
     # Use Kramdown to construct an abstract syntax tree
-    ast = Kramdown::Document.new(document)
+#    ast = Kramdown::Document.new(document)
+    ast = MultiMarkdown.new(document)
 
     # Render HTML and Latex fragments
     html_frag   = ast.to_html
@@ -52,7 +53,7 @@ class Document < ActiveRecord::Base
     html_template   = Liquid::Template.parse(html_template_body)
     latex_template  = Liquid::Template.parse(latex_template_body)
     html   = html_template.render(hash.merge("body" => html_frag))
-    latex  = latex_template.render(hash.merge("body" => latex_frag))
+    latex  = latex_template.render(hash.merge("body" => latex_frag.force_encoding("UTF-8")))
     return [latex, html]
   end
 
