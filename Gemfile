@@ -10,7 +10,6 @@ gem 'pg'
 gem 'thin'
 #gem 'unicorn'
 gem 'sidekiq'
-gem 'foreman'
 
 # Sidekiq monitoring
 gem 'slim'
@@ -30,7 +29,7 @@ gem 'friendly_id'
 gem 'liquid', git: "git://github.com/asayers/liquid.git"
 #gem 'pandoc-ruby'       # Will change to Kramdown
 gem 'rpeg-multimarkdown'
-gem 'rtex'              # Will change to just using rubber (external)
+#gem 'rtex'              # Will change to just using rubber (external)
 # md -> latex:  redcarpet, Kramdown, Multimarkdown
 # latex -> pdf: rtex, rubbr, rails-latex
 # md -> pdf:    maruku, pandoc-ruby
@@ -40,6 +39,7 @@ gem 'rtex'              # Will change to just using rubber (external)
 
 # Gems used only in the development environment
 group :development do
+  gem 'foreman'
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'hirb'
