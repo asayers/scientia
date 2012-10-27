@@ -1,5 +1,5 @@
 if ENV["RAILS_ENV"] == "production"
-  root = "/home/server/scientia"
+  root = "/home/scientia/scientia"
 else
   root = "/home/alex/git/scientia"
 end
