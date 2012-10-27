@@ -3,14 +3,14 @@ server "scientia.asayers.org", :web, :app, :db, primary: true
 set :application, "scientia"
 set :user, "scientia"
 set :deploy_to, "/home/#{user}/#{application}"
-#set :deploy_via, :remote_cache
+set :deploy_via, :remote_cache # Prevent cloning the repo on each deploy
 #set :use_sudo, false
 set :scm, :git
 set :repository,  "git@github.com:asayers/scientia.git"
 set :branch, "master"
 
-#default_run_options[:pty] = true
-#ssh_options[:forward_agent] = true
+default_run_options[:pty] = true # Allows programs like git to prompt for password
+ssh_options[:forward_agent] = true # Use local ssh key for accessing repo
 
 after "deploy:restart", "deploy:cleanup"
 
