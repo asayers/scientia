@@ -3,14 +3,14 @@ server "scientia.asayers.org", :web, :app, :db, primary: true
 set :application, "scientia"
 set :user, "scientia"
 set :deploy_to, "/home/#{user}/#{application}"
-set :deploy_via, :remote_cache
-set :use_sudo, false
+#set :deploy_via, :remote_cache
+#set :use_sudo, false
 set :scm, :git
 set :repository,  "git@github.com:asayers/scientia.git"
 set :branch, "master"
 
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
+#default_run_options[:pty] = true
+#ssh_options[:forward_agent] = true
 
 after "deploy:restart", "deploy:cleanup"
 
