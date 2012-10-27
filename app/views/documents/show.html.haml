@@ -9,10 +9,10 @@
       %li= button_to "Delete", [@user, @document], method: :delete, confirm: "Are you sure?"
       %li= button_to "Edit", edit_user_document_path(user_id: @user, id: @document), method: :get
     - if @document.pdf.nil?
-      - if @document.errors.nil?
-        %li#pdf-disabled= button_to "Generating...", "#", disabled: true
+      - if @document.warnings.nil?
+        %li#pdf-generating= button_to "Generating...", user_document_path(user_id: @user, id: @document), remote: true
       - else
-        %li#pdf-disabled= button_to "Error!", "#", disabled: true
+        %li#pdf-error= button_to "Error!", user_document_path(user_id: @user, id: @document), disabled: true
     - else
       %li#pdf-enabled= button_to "View PDF", user_document_path(user_id: @user, id: @document, format: :pdf), method: :get
 

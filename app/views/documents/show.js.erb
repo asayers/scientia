@@ -1,0 +1,8 @@
+<% if @document.pdf.nil? %>
+  <% unless @document.warnings.nil? %>
+    $("#pdf-generating").hide().after("<li id='pdf-error'> <%= j button_to('Error!', user_document_path(user_id: @user, id: @document), disabled: true) %>")
+  <% end %>
+<% else %>
+  $("#pdf-generating").hide().after("<li id='pdf-enabled'> <%= j button_to("View PDF", user_document_path(user_id: @user, id: @document, format: :pdf), method: :get) %>")
+<% end %>
+

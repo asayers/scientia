@@ -32,9 +32,9 @@
             = link_to("Log out", log_out_path)
           - else
             %a#login.modal-toggle(href="#")
-              = "Log in" unless logged_in?
+              = "Log in"
     - unless logged_in?
-      #login-modal.modal.clearfix
+      #login-modal.modal.gray
         = form_tag log_in_path do
           - session[:return_to_url] = request.url
           = text_field_tag :username, "", placeholder: "Username"
