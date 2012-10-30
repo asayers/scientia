@@ -12,7 +12,7 @@ set -e
 
 # Feel free to change any of the following variables for your app:
 TIMEOUT=${TIMEOUT-60}
-APP_ROOT=/home/scientia/scientia/current
+APP_ROOT=/home/scientia/scientia
 PID=$APP_ROOT/tmp/unicorn.pid
 CMD="cd $APP_ROOT; $APP_ROOT/bin/unicorn_rails -D -c $APP_ROOT/config/unicorn.rb -E production"
 AS_USER=scientia
