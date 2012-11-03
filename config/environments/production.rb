@@ -14,8 +14,11 @@ Scientia::Application.configure do
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
-  # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  # TODO: Figure out why serving assets fails without this. Having this option
+  # set is not ideal, as it requires loading in the assets group dependencies
+  # just to run the app.
+  # Do fallback to assets pipeline if a precompiled asset is missed
+  config.assets.compile = true
 
   # Generate digests for assets URLs
   config.assets.digest = true
