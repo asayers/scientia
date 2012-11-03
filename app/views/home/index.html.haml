@@ -8,19 +8,19 @@
 
 .grid
   #md
-    %img{src: "assets/markdown.png", width: 40, height: 40}
+    = image_tag("markdown.png", width: 40, height: 40)
     Documents are written in Extended <strong>Markdown</strong>, which makes formatting easy. You can even use your favourite text editor.
   #latex
-    %img{src: "assets/typesetting.png", width: 40, height: 40}
+    = image_tag("assets/typesetting.png", width: 40, height: 40)
     Documents are rendered with the <strong>Latex</strong> typesetting system, the industry standard for academic publishing.
 %br
 .grid
   #bib
-    %img{src: "assets/book.png", width: 40, height: 40}
+    = image_tag("assets/book.png", width: 40, height: 40)
     %span <strong>Bibliography</strong> files are written in the bibtex format, and inserting a reference into your document is as simple as <code>[@jones97]</code>.
 
   #temp
-    %img{src: "assets/template.png", width: 40, height: 40}
+    = image_tag("assets/template.png", width: 40, height: 40)
     Documents can be rendered using custom latex <strong>templates</strong>, allowing complete control over the formatting of your documents.
 
 %br
