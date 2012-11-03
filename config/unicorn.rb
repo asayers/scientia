@@ -13,3 +13,8 @@ listen "/tmp/unicorn.scientia.sock"
 worker_processes 5
 timeout 30
 preload_app true
+
+# Make sure each worker uses its own connection (avoid 'prepared statement "a3" already exists' errors)
+after_fork do |server, worker|
+  ActiveRecord::Base.establish_connection
+end
