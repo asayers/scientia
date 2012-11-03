@@ -1,15 +1,15 @@
-% Textore Change Log
-% Alex Sayers
+title:  Textore Change Log
+author: Alex Sayers
 
 Technologies
-========
+============
 
  - Pandoc for markdown -> tex
  - pdflatex (with some wrapper?) for tex -> pdf
  - moustache for templating
 
 To Do
-====
+=====
 
 - Figure out why Essay template produces a blank page
 - Use js on doc#show to query for pdf readiness (a couple of times a second?)
@@ -35,7 +35,7 @@ To Do
 
 
 Under Consideration
----------------------------
+-------------------
 
 - Isolate MathJax to document#show?
 - Replace compass with bourbon?
@@ -50,7 +50,7 @@ Under Consideration
 - Add description column to template? (and document?)
 
 Completed
-=======
+=========
 
 - ~~Escape HTML in markdown for safety~~
 - ~~Fix bibliographic style stuff~~
