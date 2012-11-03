@@ -5,7 +5,7 @@ else
 end
 
 working_directory root
-pid "#{root}/tmp/unicorn.pid"
+pid "#{root}/tmp/pids/unicorn.pid"
 stderr_path "#{root}/log/unicorn.log"
 stdout_path "#{root}/log/unicorn.log"
 

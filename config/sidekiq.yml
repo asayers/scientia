@@ -1,7 +1,7 @@
 # Sidekiq options
 ---
 :verbose: false
-#:pidfile: ./tmp/pids/sidekiq.pid
+:pidfile: ./tmp/pids/sidekiq.pid
 #:namespace: sidekiq_namespace
 :concurrency:  5
 #:queues:
