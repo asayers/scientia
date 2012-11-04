@@ -30,7 +30,17 @@
 - unless @document.warnings.nil?
   #errors= @document.warnings
 
+//#document
+//  #warning
+//    %span Note: the following is a preview, and may not accurately represent the output pdf.
+//  = @document.html.html_safe
+
+
 #document
-  #warning
-    %span Note: the following is a preview, and may not accurately represent the output pdf.
-  = @document.html.html_safe
+  - if @document.pdf.nil?
+    - if @document.warnings.nil?
+      %h1#heading Generating...
+    - else
+      %h1#heading Error!
+  - else
+    %iframe{src: user_document_path(user_id: @user, id: @document, format: :pdf)}

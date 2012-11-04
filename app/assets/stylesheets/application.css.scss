@@ -260,6 +260,11 @@ em {
   table,th,td {
     border: 1px solid black;
   }
+  iframe {
+    border-style: none;
+    width: 100%;
+    height: 760px;
+  }
 }
 
 #template, #bibliography, #markdown {
