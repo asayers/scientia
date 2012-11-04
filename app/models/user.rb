@@ -9,7 +9,7 @@ end
 class WhitelistValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return true
-    whitelist = [/^alex.sayers@gmail.com$/, /@asayers.org$/]
+    whitelist = /@asayers.org$/
     unless whitelist.match value
       record.errors[attribute] << (options[:message] || "has not been invited to the Closed Beta")
     end
