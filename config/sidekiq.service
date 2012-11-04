@@ -1,0 +1,17 @@
+[Unit]
+Description=Sidekiq job queue for Scientia
+After=syslog.target network.target
+Wants=redis.service
+
+[Service]
+Type=simple
+User=scientia
+Group=scientia
+ControlGroup=scientia
+Environment=RAILS_ENV=production
+WorkingDirectory=/home/scientia/scientia
+PIDFile=/home/scientia/scientia/tmp/pids/sidekiq.pid
+ExecStart=/home/scientia/scientia/bin/sidekiq -C /home/scientia/scientia/config/sidekiq.yml -e production
+
+[Install]
+WantedBy=multi-user.target

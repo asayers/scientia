@@ -1,0 +1,16 @@
+[Unit]
+Description=Unicorn web server for Scientia
+After=syslog.target network.target
+Wants=postgresql.service
+
+[Service]
+Type=forking
+User=scientia
+Group=scientia
+ControlGroup=scientia
+Environment=RAILS_ENV=production
+PIDFile=/home/scientia/scientia/tmp/pids/unicorn.pid
+ExecStart=/home/scientia/scientia/bin/unicorn_rails -c /home/scientia/scientia/config/unicorn.rb -D -E production
+
+[Install]
+WantedBy=multi-user.target
