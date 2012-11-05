@@ -1,8 +1,30 @@
-= simple_form_for [@user, @document] do |f|
-  = f.error_notification
-  = f.input :name
-  = f.association :template, collection: @user.templates, include_blank: "Default"
-  = f.association :bibliography, collection: @user.bibliographies, include_blank: "Default"
-  = f.input :body, label: false
-  = f.error :base
-  = f.button :submit
+//= simple_form_for [@user, @document] do |f|
+//  = f.error_notification
+//  = f.input :name
+//  = f.association :template, collection: @user.templates, include_blank: "Default"
+//  = f.association :bibliography, collection: @user.bibliographies, include_blank: "Default"
+//  = f.input :body, label: false
+//  = f.error :base
+//  = f.button :submit
+
+
+.wmd-panel
+  #wmd-button-bar
+  %textarea.wmd-input#wmd-input
+    This is the *first* editor.
+    ------------------------------
+
+    Just plain **Markdown**, except that the input is sanitized:
+
+    <marquee>I'm the ghost from the past!</marquee>
+
+  #wmd-preview.wmd-panel.wmd-preview
+        
+- content_for :javascript do
+  = javascript_include_tag "editor"
+  :javascript
+    (function () {
+        var converter = Markdown.getSanitizingConverter();
+        var editor = new Markdown.Editor(converter);
+        editor.run();
+    })();
