@@ -49,8 +49,8 @@
     .main
       = yield
     %footer &copy; 2012 Alex Sayers
-  
+
 = javascript_include_tag "application"
-= javascript_include_tag "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+= yield :javascript
 
 </html>
