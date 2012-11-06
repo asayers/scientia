@@ -7,17 +7,11 @@
 //  = f.error :base
 //  = f.button :submit
 
-
 .wmd-panel
   #wmd-button-bar
-  %textarea.wmd-input#wmd-input
-    This is the *first* editor.
-    ------------------------------
-
-    Just plain **Markdown**, except that the input is sanitized:
-
-    <marquee>I'm the ghost from the past!</marquee>
-
+  = form_for [@user, @document] do |f|
+    = f.text_area :body, class: "wmd-input", id: "wmd-input"
+    = f.submit
   #wmd-preview.wmd-panel.wmd-preview
         
 - content_for :javascript do
