@@ -2,15 +2,15 @@
 
 echo "> Synching repo"
 git pull origin master
-echo "Recompile assets?"
+echo -n "Recompile assets? "
 read ASSETS
-if [ $ASSETS == "y" || $ASSETS == "yes" ]; then
+if [ $ASSETS == "y" ]; then
   echo "> Precompiling assets..."
   bundle exec rake assets:precompile
 fi
-echo "Migrate database?"
+echo -n "Migrate database? "
 read MIGRATE
-if [ $MIGRATE == "y" || $MIGRATE == "yes" ]; then
+if [ $MIGRATE == "y" ]; then
   echo "> Migrating database..."
   bundle exec rake db:migrate
 fi
