@@ -1,8 +1,11 @@
 <% if @document.pdf.nil? %>
-  <% unless @document.warnings.nil? %>
-    $("#pdf-generating").hide().after("<li id='pdf-error'> <%= j button_to('Error!', user_document_path(user_id: @user, id: @document), disabled: true) %>")
+  <% if @document.warnings.nil? %>
+    setTimeout(function(){jQuery.getScript(document.URL)}, 500);
+  <% else %>
+    $("#document").html("<h1 id='heading'>Error!</h1>");
+    $("#pdf_button").html("<li id='pdf_button'><%= j button_to('Error!', user_document_path(user_id: @user, id: @document), disabled: true) %>");
   <% end %>
 <% else %>
-  $("#pdf-generating").hide().after("<li id='pdf-enabled'> <%= j button_to("View PDF", user_document_path(user_id: @user, id: @document, format: :pdf), method: :get) %>")
+  $("#document").html("<iframe src='<%= user_document_path(user_id: @user, id: @document, format: :pdf) %>'></iframe>");
+  $("#pdf_button").html("<%= j button_to("View PDF", user_document_path(user_id: @user, id: @document, format: :pdf), method: :get) %>")
 <% end %>
-

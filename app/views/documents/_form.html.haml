@@ -8,10 +8,16 @@
 //  = f.button :submit
 
 .wmd-panel
-  #wmd-button-bar
-  = form_for [@user, @document] do |f|
-    = f.text_area :body, class: "wmd-input", id: "wmd-input"
-    = f.submit
+  = simple_form_for [@user, @document] do |f|
+    = f.error_notification
+    = f.text_field :name
+    #collections.clearfix
+      %span.left<= f.association :template, collection: @user.templates, include_blank: "Default"
+      %span.left= f.association :bibliography, collection: @user.bibliographies, include_blank: "Default"
+      %span.right= f.submit "Save"
+    #wmd-button-bar
+    = f.text_area :body, class: "wmd-input", id: "wmd-input", label: false
+    = f.error :base
   #wmd-preview.wmd-panel.wmd-preview
         
 - content_for :javascript do

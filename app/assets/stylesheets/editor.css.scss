@@ -2,19 +2,60 @@
 
 .wmd-panel
 {
-        width: 100%;
+  width: 100%;
+  input[type='text'] {
+    margin-left: 2%;
+    width: 95%
+  }
+  textarea {
+    margin-top:0;
+  }
+  #collections {
+    padding: 0;
+    margin-left: 2%;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    span {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      margin-right: 2em;
+      display: inline;
+      div {
+        margin: 0;
+      }
+      label {
+        padding: 0;
+        padding-right: 1.5em;
+      }
+      input[type='submit'] {
+        padding: 0;
+        margin-left: 0;
+        padding-right: 2.5em;
+        padding-left: 0.3em;
+        float: right;
+      }
+    }
+    span.left {
+      float:left;
+    }
+    span.right {
+      float:right;
+    }
+  }
 }
 
 .wmd-button-bar 
 {
-        width: 100%;
+        width: 400px;
         background-color: Silver; 
 }
 
 .wmd-input 
 { 
         height: 300px;
-        width: 100%;
+        margin-left: 2%;
+        width: 95%;
         background-color: Gainsboro;
         border: 1px solid DarkGray;
         font-family: monospace;

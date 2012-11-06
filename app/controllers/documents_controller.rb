@@ -10,6 +10,7 @@ class DocumentsController < ApplicationController
     @document = @user.documents.find(params[:id])
     respond_to do |format|
       format.html
+      format.js
       format.pdf { send_data @document.pdf, disposition: 'inline', type: 'application/pdf' }
       format.md { send_data @document.body, disposition: 'inline', type: 'text/plain' }
       format.tex { send_data @document.latex, disposition: 'inline', type: 'text/plain' }
