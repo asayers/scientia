@@ -3,19 +3,18 @@ class TemplateWorker
   sidekiq_options retry: false
 
   def perform(id)
+  end
+
+  def old_perform(id)
     # Fetch records; create directory
     template = Template.find(id)
     latex, html = Document.find(1).compile(template.body)
-    bib = Bibliography.find(1).body
     dir = Dir.mktmpdir("scientia-")
     
     # Write source files
     source = File.open(dir+"/source.tex", 'w')
-    biblio = File.open(dir+"/biblio.bib", 'w')
     source.puts latex
-    biblio.puts bib
     source.close
-    biblio.close
 
     # Render
     begin

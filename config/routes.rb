@@ -16,8 +16,6 @@ Scientia::Application.routes.draw do
   post    "new_document"      => "documents#create",  as: "user_documents"
   get     "new_template"      => "templates#new",     as: "new_user_template"
   post    "new_template"      => "templates#create",  as: "user_templates"
-  get     "new_bibliography"  => "bibliographies#new",     as: "new_user_bibliography"
-  post    "new_bibliography"  => "bibliographies#create",  as: "user_bibliographies"
   get     ":id"               => "users#show",        as: "user"
   put     ":id"               => "users#update"
   delete  ":id"               => "users#destroy"
@@ -30,10 +28,6 @@ Scientia::Application.routes.draw do
   put     ":user_id/templates/:id"    => "templates#update"
   delete  ":user_id/templates/:id"    => "templates#destroy"
   get   ":user_id/templates/:id/edit" => "templates#edit",    as: "edit_user_template"
-  get     ":user_id/bibliographies/:id" => "bibliographies#show",    as: "user_bibliography"
-  put     ":user_id/bibliographies/:id"    => "bibliographies#update"
-  delete  ":user_id/bibliographies/:id"    => "bibliographies#destroy"
-  get ":user_id/bibliographies/:id/edit" => "bibliographies#edit", as: "edit_user_bibliography"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

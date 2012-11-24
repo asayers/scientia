@@ -3,38 +3,52 @@ class DocumentWorker
   sidekiq_options retry: false
 
   def perform(id)
-    # Fetch records; create directory
-    doc = Document.includes(:bibliography).find(id)
-    bib = doc.bibliography ? doc.bibliography : Bibliography.find(1)
-    dir = Dir.mktmpdir("scientia-")
-    
-    # Write source files
-    source = File.open(dir+"/source.tex", 'w')
-    biblio = File.open(dir+"/biblio.bib", 'w')
-    source.puts doc.latex
-    biblio.puts bib.body
+    # Fetch records
+    doc = Document.includes(:template).includes(:supplements).find(id)
+    template = doc.template ? doc.template.body : Template.find(1).body
+    supplements = doc.supplements
+
+    # Remove variable assignment lines from document and use them to populate vars
+    # TODO: replace with YAML parser
+    md = doc.body
+    vars = {}
+    md.each_line do |line|
+      if data = line.match(/^([^ ]*): +(.*)/)
+        vars[data[1]] = data[2]
+        md.sub!(/^.+\n/, "")
+      else
+        break
+      end
+    end
+
+    # Use MD renderer to create a latex fragment and merge it into vars
+    frag = MultiMarkdown.new(md).to_latex.force_encoding("UTF-8")
+    vars.merge!("body" => frag)
+
+    # Render the final Latex by passing hash+fragment into a Liquid/Mustache template
+    latex = Liquid::Template.parse(template).render(vars)
+
+    # Create directory; write files
+    dir = Rails.root.join("data/documents/#{doc.id}")
+    unless dir.exist?
+      FileUtils.mkdir_p(dir)
+    end
+    source = File.open(dir.join("#{doc.slug}.tex"), 'w')
+    source.puts(latex)
     source.close
-    biblio.close
 
     # Render
-    begin
-      puts "=> Beginning render...    (#{doc.name})"
-      system("rubber --inplace --pdf #{source.path}")
-    rescue
+    puts "=> Beginning render...    (#{doc.name})"
+    system("rubber --inplace --pdf #{source.path}")
+    if $?.success?
+      puts "=> Render successful!     (#{doc.name})"
+      doc.warnings = nil
+    else
       # TODO: try to reclaim the errors
       puts "=> Something went wrong!  (#{doc.name})"
       doc.warnings = "Latex rendering error!"
-    else
-      puts "=> Render successful!     (#{doc.name})"
-      output = File.open(dir+"/source.pdf", 'r')
-      doc.pdf = output.read
-      output.close
-      doc.warnings = nil
-    ensure
-      # Tidy up; save
-      FileUtils.remove_entry_secure dir
-      doc.save
     end
+    doc.save
       
 #     The same, but with rubber-pipe?
 #     IO.popen("rubber-pipe") do |io|
@@ -43,15 +57,5 @@ class DocumentWorker
 #     end
 #     if $? == 0 ...
    
-#    rtex = RTeX::Document.new(doc.latex)
-#    begin
-#      doc.pdf = rtex.to_pdf
-#    rescue
-#      doc.warnings = "Latex rendering error. Check your template!"
-#    else
-#      doc.warnings = nil
-#    ensure
-#      doc.save
-#    end
   end
 end

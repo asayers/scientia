@@ -8,19 +8,18 @@
     - if @user == current_user
       %li= button_to "Delete", [@user, @document], method: :delete, confirm: "Are you sure?"
       %li= button_to "Edit", edit_user_document_path(user_id: @user, id: @document), method: :get
-    - if @document.pdf.nil?
-      - if @document.warnings.nil?
-        %li#pdf_button= button_to "Generating...", user_document_path(user_id: @user, id: @document), disabled: true
-      - else
-        %li#pdf_button= button_to "Error!", user_document_path(user_id: @user, id: @document), disabled: true
-    - else
+    - case @document.state
+    - when :success
       %li#pdf_button= button_to "View PDF", user_document_path(user_id: @user, id: @document, format: :pdf), method: :get
+    - when :generating
+      %li#pdf_button= button_to "Generating...", user_document_path(user_id: @user, id: @document), disabled: true
+    - when :error
+      %li#pdf_button= button_to "Error!", user_document_path(user_id: @user, id: @document), disabled: true
 
 #more-modal.modal.gray
   .ctrls
     .left
       %span Template: #{@document.template.nil? ? link_to("Default", "/root/templates/default") : link_to(@document.template.name, [@user,@document.template])}
-      %span Bibliography: #{@document.bibliography.nil? ? link_to("Default", "/root/bibliographies/default") : link_to(@document.bibliography.name, [@user,@document.bibliography])}
     .right
       %span= button_to "View tex", user_document_path(user_id: @user, id: @document, format: :tex), method: :get
       %span= button_to "View raw", user_document_path(user_id: @user, id: @document, format: :md), method: :get
@@ -30,17 +29,12 @@
 - unless @document.warnings.nil?
   #errors= @document.warnings
 
-//#document
-//  #warning
-//    %span Note: the following is a preview, and may not accurately represent the output pdf.
-//  = @document.html.html_safe
-
 #document
-  - if @document.pdf.nil?
-    - if @document.warnings.nil?
-      %h1#heading Generating...
-      = javascript_tag "setTimeout(function(){jQuery.getScript(document.URL)},500);"
-    - else
-      %h1#heading Error!
-  - else
+  - case @document.state
+  - when :success
     %iframe{src: user_document_path(user_id: @user, id: @document, format: :pdf)}
+  - when :generating
+    %h1#heading Generating...
+    = javascript_tag "setTimeout(function(){jQuery.getScript(document.URL)},500);"
+  - when :error
+    %h1#heading Error!

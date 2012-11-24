@@ -33,9 +33,10 @@ class DocumentsController < ApplicationController
   def create
     @document = Document.new(params[:document])
     @document.user_id = session[:user_id]
-    
+    @document.warnings = "Generating..."
+
     if @document.save
-      @document.regenerate
+      DocumentWorker.perform_async(@document.id)
       redirect_to [@document.user, @document], notice: 'Document was successfully created.'
     else
       flash[:error] = "Couldn't create document"
@@ -46,8 +47,10 @@ class DocumentsController < ApplicationController
   def update
     @user = User.find(session[:user_id])
     @document = @user.documents.find(params[:id])
+    @document.warnings = "Generating..."
+    
     if @document.update_attributes(params[:document])
-      @document.regenerate
+      DocumentWorker.perform_async(@document.id)
       redirect_to [@user, @document], notice: 'Document was successfully updated.'
     else
       flash[:error] = "Couldn't save document"

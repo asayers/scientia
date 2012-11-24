@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   extend FriendlyId
   has_many :documents
   has_many :templates
-  has_many :bibliographies
+  has_many :favourites
   friendly_id :username
 
   attr_accessible :username, :email, :password, :password_confirmation

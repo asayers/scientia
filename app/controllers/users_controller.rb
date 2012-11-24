@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:documents).includes(:templates).includes(:bibliographies).find(params[:id])
+    @user = User.includes(:documents).includes(:templates).includes(:favourites).find(params[:id])
   end
 
   def new

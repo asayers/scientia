@@ -6,8 +6,8 @@ class CreateDocuments < ActiveRecord::Migration
       t.references  :user
       t.references  :template
       t.text        :body
-      t.text        :latex
       t.text        :warnings
+      t.boolean     :public
 
       t.timestamps
     end

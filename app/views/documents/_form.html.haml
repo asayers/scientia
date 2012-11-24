@@ -12,8 +12,7 @@
     = f.error_notification
     = f.text_field :name
     #collections.clearfix
-      %span.left<= f.association :template, collection: @user.templates, include_blank: "Default"
-      %span.left= f.association :bibliography, collection: @user.bibliographies, include_blank: "Default"
+      %span.left= f.association :template, collection: @user.templates, include_blank: "Default"
       %span.right= f.submit "Save"
     #wmd-button-bar
     = f.text_area :body, class: "wmd-input", id: "wmd-input", label: false

@@ -8,11 +8,15 @@ class Template < ActiveRecord::Base
 
   validates_presence_of :name, :user
 
-  def regenerate
-    self.pdf = nil
-    self.warnings = nil
-    if self.save
-      TemplateWorker.perform_async(self.id)
+  def pdf
+    begin
+      f = File.open(Rails.root.join("data/templates/#{self.id}.pdf"), 'r')
+    rescue
+      pdf = nil
+    else
+      pdf = f.read
+      f.close
     end
-  end
+    return pdf
+  end  
 end

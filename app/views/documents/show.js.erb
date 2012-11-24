@@ -1,11 +1,11 @@
-<% if @document.pdf.nil? %>
-  <% if @document.warnings.nil? %>
-    setTimeout(function(){jQuery.getScript(document.URL)}, 500);
-  <% else %>
-    $("#document").html("<h1 id='heading'>Error!</h1>");
-    $("#pdf_button").html("<li id='pdf_button'><%= j button_to('Error!', user_document_path(user_id: @user, id: @document), disabled: true) %>");
-  <% end %>
-<% else %>
+<% case @document.state %>
+<% when :success %>
+  $("#errors").hide();
   $("#document").html("<iframe src='<%= user_document_path(user_id: @user, id: @document, format: :pdf) %>'></iframe>");
-  $("#pdf_button").html("<%= j button_to("View PDF", user_document_path(user_id: @user, id: @document, format: :pdf), method: :get) %>")
+  $("#pdf_button").html("<%= j button_to("View PDF", user_document_path(user_id: @user, id: @document, format: :pdf), method: :get) %>");
+<% when :generating %>
+  setTimeout(function(){jQuery.getScript(document.URL)}, 500);
+<% when :error %>
+  $("#document").html("<h1 id='heading'>Error!</h1>");
+  $("#pdf_button").html("<li id='pdf_button'><%= j button_to('Error!', user_document_path(user_id: @user, id: @document), disabled: true) %>");
 <% end %>

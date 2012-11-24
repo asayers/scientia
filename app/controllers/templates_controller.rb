@@ -31,9 +31,9 @@ class TemplatesController < ApplicationController
   def create
     @template = Template.new(params[:template])
     @template.user_id = session[:user_id]
-    
+    @template.warnings = nil
     if @template.save
-      @template.regenerate
+      TemplateWorker.perform_async(@template.id)
       redirect_to [@template.user, @template], notice: 'Template was successfully created.'
     else
       flash[:error] = "Couldn't create template"
@@ -44,8 +44,9 @@ class TemplatesController < ApplicationController
   def update
     @user = User.find(session[:user_id])
     @template = @user.templates.find(params[:id])
+    @template.warnings = nil
     if @template.update_attributes(params[:template])
-      @template.regenerate
+      TemplateWorker.perform_async(@template.id)
       redirect_to [@user, @template], notice: 'Template was successfully updated.'
     else
       flash[:error] = "Couldn't save template"

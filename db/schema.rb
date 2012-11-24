@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121124010041) do
+ActiveRecord::Schema.define(:version => 20121124011310) do
 
   create_table "documents", :force => true do |t|
     t.string   "name"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(:version => 20121124010041) do
     t.integer  "user_id"
     t.integer  "template_id"
     t.text     "body"
-    t.text     "latex"
     t.text     "warnings"
+    t.boolean  "public"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -28,6 +28,28 @@ ActiveRecord::Schema.define(:version => 20121124010041) do
   add_index "documents", ["slug"], :name => "index_documents_on_slug"
   add_index "documents", ["template_id"], :name => "index_documents_on_template_id"
   add_index "documents", ["user_id"], :name => "index_documents_on_user_id"
+
+  create_table "favourites", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.string   "type"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "favourites", ["slug"], :name => "index_favourites_on_slug"
+  add_index "favourites", ["user_id"], :name => "index_favourites_on_user_id"
+
+  create_table "supplements", :force => true do |t|
+    t.string   "name"
+    t.string   "type"
+    t.integer  "document_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "supplements", ["document_id"], :name => "index_supplements_on_document_id"
 
   create_table "templates", :force => true do |t|
     t.string   "name"

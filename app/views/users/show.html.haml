@@ -14,7 +14,7 @@
     - @user.documents.each do |document|
       %tr
         %td= link_to document.name, [@user, document]
-        %td= truncate strip_tags(document.html), length: 60
+        %td= truncate strip_tags(document.body), length: 60
 .grid
   #templates
     .meta.clearfix
@@ -25,13 +25,6 @@
           %li= button_to "New Template", new_user_template_path, method: :get
     - @user.templates.each do |template|
       %p= link_to template.name, [@user, template]
-  #bibliographies
+  #favourites
     .meta.clearfix
-      - bibs = @user.bibliographies.length
-      %span= pluralize(bibs, "bibliography") + (bibs > 0 ? ":" : ".")
-      %ul
-        - if @user == current_user
-          %li= button_to "New Bibliography", new_user_bibliography_path, method: :get
-    - @user.bibliographies.each do |bibliography|
-      %p= link_to bibliography.name, [@user, bibliography]
-
+      %span Saved files coming soon...

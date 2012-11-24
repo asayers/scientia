@@ -14,6 +14,5 @@ class HomeController < ApplicationController
     @user_count = User.count
     @document_count = Document.count
     @template_count = Template.count
-    @bibliography_count = Bibliography.count
   end
 end

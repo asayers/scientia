@@ -8,10 +8,7 @@
 
 # Note that order is important. Things making reference to Document/Template/Bibliography.find(1) will expect some kind of default.
 
-User.create(username: "root", email: "alex.sayers@bnc.ox.ac.uk", password: "foobar", password_confirmation: "foobar")
+User.create(username: "root", email: "root@asayers.org", password: "foobar", password_confirmation: "foobar")
 Document.create(name: "Default", user_id: 1, body: "See db/seed_data/root/default.md")
 Document.create(name: "Welcome", user_id: 1, body: "See db/seed_data/root/welcome.md")
 Template.create(name: "Default", user_id: 1, body: "See db/seed_data/root/default.tex")
-Bibliography.create(name: "Default", user_id: 1, body: "See db/seed_data/root/default.bib")
-Document.all.each { |d| d.regenerate }
-Template.all.each { |t| t.regenerate }
