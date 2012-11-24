@@ -5,7 +5,6 @@ class CreateTemplates < ActiveRecord::Migration
       t.string      :slug
       t.references  :user
       t.text        :body
-      t.binary      :pdf
       t.text        :warnings
 
       t.timestamps

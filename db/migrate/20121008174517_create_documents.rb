@@ -5,11 +5,8 @@ class CreateDocuments < ActiveRecord::Migration
       t.string      :slug
       t.references  :user
       t.references  :template
-      t.references  :bibliography
       t.text        :body
-      t.text        :html
       t.text        :latex
-      t.binary      :pdf
       t.text        :warnings
 
       t.timestamps
@@ -18,6 +15,5 @@ class CreateDocuments < ActiveRecord::Migration
     add_index :documents, :slug
     add_index :documents, :user_id
     add_index :documents, :template_id
-    add_index :documents, :bibliography_id
   end
 end

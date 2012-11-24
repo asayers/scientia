@@ -17,7 +17,7 @@ development:
   encoding: unicode
   database: scientia_development
   pool: 5
-  username: alex
+  username: devel
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -43,7 +43,7 @@ test:
   encoding: unicode
   database: scientia_test
   pool: 5
-  username: alex
+  username: devel
   password:
 
 production:
@@ -51,5 +51,5 @@ production:
   encoding: unicode
   database: scientia
   pool: 5
-  username: scientia
+  username: deployer
   password:
