@@ -150,6 +150,7 @@ GEM
     redis (3.0.2)
     redis-namespace (1.2.1)
       redis (~> 3.0.0)
+    rmagick (2.13.1)
     rpeg-multimarkdown (0.1.1)
     sass (3.2.1)
     sass-rails (3.2.5)
@@ -222,6 +223,7 @@ DEPENDENCIES
   pry-rails
   rack-mini-profiler
   rails (= 3.2.3)
+  rmagick
   rpeg-multimarkdown
   sass-rails (~> 3.2.3)
   sidekiq

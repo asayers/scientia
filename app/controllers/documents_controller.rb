@@ -7,13 +7,14 @@ class DocumentsController < ApplicationController
 
   def show
     @user = User.find(params[:user_id])
-    @document = @user.documents.find(params[:id])
+    @document = @user.documents.includes(:template).find(params[:id])
     respond_to do |format|
       format.html
       format.js
       format.pdf { send_data @document.pdf, disposition: 'inline', type: 'application/pdf' }
       format.md { send_data @document.body, disposition: 'inline', type: 'text/plain' }
       format.tex { send_data @document.latex, disposition: 'inline', type: 'text/plain' }
+      format.png { send_data @document.preview, disposition: 'inline', type: 'image/png' }
     end
   end
 

@@ -34,6 +34,8 @@ gem 'rpeg-multimarkdown'
 # md -> latex:  redcarpet, Kramdown, Multimarkdown
 # latex -> pdf: rtex, rubbr, rails-latex
 # md -> pdf:    maruku, pandoc-ruby
+# For generating the preview
+gem 'rmagick'
 
 # For a nice json api: gem 'rabl'
 # For easy ajax: gem 'pjax_rails'

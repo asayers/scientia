@@ -4,10 +4,6 @@
 .meta.clearfix
   %span Created by #{link_to @user.username, @user} on #{@document.created_at.to_date.inspect}
   %ul
-    %li= button_to "More...", "#", method: :get, id: "more", class: "modal-toggle"
-    - if @user == current_user
-      %li= button_to "Delete", [@user, @document], method: :delete, confirm: "Are you sure?"
-      %li= button_to "Edit", edit_user_document_path(user_id: @user, id: @document), method: :get
     - case @document.state
     - when :success
       %li#pdf_button= button_to "View PDF", user_document_path(user_id: @user, id: @document, format: :pdf), method: :get
@@ -16,25 +12,33 @@
     - when :error
       %li#pdf_button= button_to "Error!", user_document_path(user_id: @user, id: @document), disabled: true
 
-#more-modal.modal.gray
-  .ctrls
-    .left
-      %span Template: #{@document.template.nil? ? link_to("Default", "/root/templates/default") : link_to(@document.template.name, [@user,@document.template])}
-    .right
-      %span= button_to "View tex", user_document_path(user_id: @user, id: @document, format: :tex), method: :get
-      %span= button_to "View raw", user_document_path(user_id: @user, id: @document, format: :md), method: :get
-  %hr
-  %p Metadata coming soon! (Title, authors, date, world count, referenced by...)
+#errors_placement
+  - unless @document.warnings.nil? or @document.warnings == "Generating..."
+    #errors= @document.warnings
 
-- unless @document.warnings.nil?
-  #errors= @document.warnings
-
-#document
-  - case @document.state
-  - when :success
-    %iframe{src: user_document_path(user_id: @user, id: @document, format: :pdf)}
-  - when :generating
-    %h1#heading Generating...
-    = javascript_tag "setTimeout(function(){jQuery.getScript(document.URL)},500);"
-  - when :error
-    %h1#heading Error!
+.grid
+  #document
+    - case @document.state
+    - when :success
+      = image_tag user_document_path(user_id: @user, id: @document, format: :png), width: 300
+      //%iframe{src: user_document_path(user_id: @user, id: @document, format: :pdf)}
+    - when :generating
+      %h1#heading Generating...
+      = javascript_tag "jQuery(function(){jQuery.getScript(document.URL)});"
+    - when :error
+      %h1#heading Error!
+  #info
+    %p Metadata here.
+    %p Template: #{@document.template.nil? ? link_to("Default", "/root/templates/default") : link_to(@document.template.name, [@user,@document.template])}
+    %p Associated files coming soon!
+    - if @user == current_user
+      .ctrls.gray
+        %span Owner controls:
+        %ul
+          %li.left= button_to "Delete", [@user, @document], method: :delete, confirm: "Are you sure?"
+          %li.right= button_to "Edit", edit_user_document_path(user_id: @user, id: @document), method: :get
+    %p.muted
+      Other views:
+      = link_to "tex", user_document_path(user_id: @user, id: @document, format: :tex)
+      ,
+      = link_to "raw", user_document_path(user_id: @user, id: @document, format: :md)

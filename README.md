@@ -1,6 +1,12 @@
 Scientia Communis
 =================
 
+Remember to install
+- texlive-most
+- ghostscript (otherwise RMagic can't open pdfs)
+- rubber
+
+
 
 Scientia is a tool which allows you to publish academic papers with ease. Documents are written in Extended Markdown, and are rendered to pdf using the Latex typesetting system. The following is how you'd write a typical document in Scientia.
 

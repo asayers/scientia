@@ -17,6 +17,8 @@
   %meta(content='width=device-width' name='viewport')
   = csrf_meta_tags
   = stylesheet_link_tag "application", :media => "all"
+  = javascript_include_tag "application"
+  = yield :javascript
 
 %body
   .container
@@ -49,8 +51,5 @@
     .main
       = yield
     %footer &copy; 2012 Alex Sayers
-
-= javascript_include_tag "application"
-= yield :javascript
 
 </html>
