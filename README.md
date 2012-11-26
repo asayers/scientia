@@ -3,8 +3,9 @@ Scientia Communis
 
 Remember to install
 - texlive-most
-- ghostscript (otherwise RMagic can't open pdfs)
 - rubber
+- imagemagick
+- ghostscript (otherwise RMagic can't open pdfs)
 
 
 
