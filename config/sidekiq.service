@@ -5,7 +5,7 @@ Wants=redis.service
 
 [Service]
 Type=simple
-User=scientia
+User=deployer
 Group=scientia
 ControlGroup=scientia
 Environment=RAILS_ENV=production
