@@ -6,11 +6,11 @@ Wants=postgresql.service
 [Service]
 Type=forking
 User=deployer
-Group=scientia
+Group=users
 ControlGroup=scientia
 Environment=RAILS_ENV=production
-PIDFile=/home/scientia/scientia/tmp/pids/unicorn.pid
-ExecStart=/home/scientia/scientia/bin/unicorn_rails -c /home/scientia/scientia/config/unicorn.rb -D -E production
+PIDFile=/home/deployer/scientia/tmp/pids/unicorn.pid
+ExecStart=/home/deployer/scientia/bin/unicorn_rails -c /home/deployer/scientia/config/unicorn.rb -D -E production
 
 [Install]
 WantedBy=multi-user.target
