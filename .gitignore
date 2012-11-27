@@ -16,5 +16,4 @@
 .htaccess
 .env
 /public/assets
-/bin
 /data
