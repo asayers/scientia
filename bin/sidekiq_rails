@@ -1,0 +1,3 @@
+#! /bin/bash
+
+nohup /home/deployer/scientia/bin/sidekiq &
