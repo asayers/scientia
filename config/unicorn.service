@@ -8,7 +8,7 @@ Type=forking
 User=deployer
 Group=users
 ControlGroup=scientia
-Environment="RAILS_ENV=production;PATH=$PATH:/home/deployer/.rbenv/bin"
+Environment=RAILS_ENV=production
 PIDFile=/home/deployer/scientia/tmp/pids/unicorn.pid
 ExecStart=/home/deployer/scientia/bin/unicorn_rails -c /home/deployer/scientia/config/unicorn.rb -D -E production
 

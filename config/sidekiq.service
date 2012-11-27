@@ -8,7 +8,7 @@ Type=simple
 User=deployer
 Group=users
 ControlGroup=scientia
-Environment="RAILS_ENV=production;PATH=$PATH:/home/deployer/.rbenv/bin"
+Environment=RAILS_ENV=production
 WorkingDirectory=/home/deployer/scientia
 PIDFile=/home/deployer/scientia/tmp/pids/sidekiq.pid
 ExecStart=/home/deployer/scientia/bin/sidekiq -C /home/deployer/scientia/config/sidekiq.yml -e production
