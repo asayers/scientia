@@ -7,7 +7,7 @@
 
 % Use biblatex
 \usepackage[style=verbose-trad1]{biblatex}
-\bibliography{biblio.bib}
+\bibliography{<< bibliography >>}
 \newcommand{\citep}[1]{\autocite{#1}}
 
 % Use footnotes instead of hyperlinks
@@ -26,11 +26,13 @@
 \newcommand{\abs}[1]{\left| #1 \right|} % for absolute value
 \newcommand{\avg}[1]{\left< #1 \right>} % for average
 \let\underdot=\d % rename builtin command \d{} to \underdot{}
-\renewcommand{\d}[2]{\frac{d #1}{d #2}} % for derivatives
+\renewcommand{\d}{\textrm{d}}
+%\renewcommand{\d}[2]{\frac{d #1}{d #2}} % for derivatives
 \newcommand{\dd}[2]{\frac{d^2 #1}{d #2^2}} % for double derivatives
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}} % for partial derivatives
 \newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}} % for double partial derivatives
 \newcommand{\pdc}[3]{\left( \frac{\partial #1}{\partial #2} \right)_{#3}} % for thermodynamic partial derivatives
+\def\dbar{{\mathchar'26\mkern-12mu d}}  % for inexact differentials
 \newcommand{\bra}[1]{\left< #1 \right|} % for Dirac bras
 \newcommand{\ket}[1]{\left| #1 \right>} % for Dirac kets
 \newcommand{\braket}[2]{\left< #1 \vphantom{#2} \right| \left. #2 \vphantom{#1} \right>} % for Dirac brackets
@@ -46,7 +48,7 @@
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
 \theoremstyle{definition}
-\newtheorem{dfn}{Definition}
+\newtheorem*{dfn}{Definition}
 \theoremstyle{remark}
 \newtheorem*{rmk}{Remark}
 

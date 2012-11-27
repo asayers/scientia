@@ -61,7 +61,7 @@ class Document < ActiveRecord::Base
 
   def latex
     md = self.body
-    templ = self.template.body
+    templ = self.template ? self.template.body : Template.find(1).body
     vars = {}
     
     # Remove variable assignment lines from document and use them to populate vars
